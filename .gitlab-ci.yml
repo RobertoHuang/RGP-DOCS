@@ -1,0 +1,19 @@
+variables:
+
+stages:
+  - deploy
+
+.deploy_template: &deploy_template
+  stage: deploy
+  script:
+    - docker-compose build
+    - docker-compose up -d
+  after_script:
+    - docker images | grep none | awk '{print $3}' | xargs docker rmi -f
+  only:
+    - master
+
+docs-deploy-1:
+  <<: *deploy_template
+  tags:
+    - tag1

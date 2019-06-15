@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  common-docsify:
+    image: docsify
+    build:
+      context: .
+    container_name: common-docsify
+    restart: always
+    ports:
+      - 8080:3000
